@@ -19,6 +19,8 @@
 #include <QDragMoveEvent>
 #include <QDropEvent>
 #include <QMouseEvent>
+#include <QWheelEvent>
+#include <QScrollBar>
 #include <QPersistentModelIndex>
 #include <QStyleOptionButton>
 #include <QTimerEvent>
@@ -571,7 +573,33 @@ private:
     bool m_banding = false;
 };
 
-using IconList = DropTarget<QListView>;
+// QListView's item-wise wheel scrolling moves only a few cells per notch,
+// which on a wide icon grid is barely a nudge. Scroll by whole rows instead,
+// like Explorer, while leaving trackpads to their native pixel deltas.
+class IconList : public DropTarget<QListView> {
+public:
+    using DropTarget<QListView>::DropTarget;
+
+    void wheelEvent(QWheelEvent *event) override
+    {
+        if (event->modifiers().testFlag(Qt::ControlModifier) || !event->pixelDelta().isNull()
+            || event->angleDelta().y() == 0) {
+            QListView::wheelEvent(event);
+            return;
+        }
+
+        const int notches = event->angleDelta().y() / 120;
+        if (notches == 0) {
+            QListView::wheelEvent(event);
+            return;
+        }
+
+        const int row = gridSize().height() > 0 ? gridSize().height() : 96;
+        auto *bar = verticalScrollBar();
+        bar->setValue(bar->value() - notches * row * 3);
+        event->accept();
+    }
+};
 
 } // namespace
 
@@ -718,6 +746,8 @@ void FileView::buildIconView()
     m_icons->setResizeMode(QListView::Adjust);
     m_icons->setSelectionRectVisible(true);
     m_icons->setMovement(QListView::Static);
+    // Pixels rather than items, so one wheel notch can move a whole icon row
+    m_icons->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
     Aero::setPointSize(m_icons, 9);
 
     list->onDrop = [this](QDropEvent *event) {

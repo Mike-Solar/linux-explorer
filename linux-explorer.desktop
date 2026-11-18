@@ -1,8 +1,11 @@
 #!/usr/bin/env xdg-open
 [Desktop Entry]
 Name=File Explorer
+Name[zh_CN]=文件资源管理器
 GenericName=File Manager
+GenericName[zh_CN]=文件管理器
 Comment=Browse files and folders
+Comment[zh_CN]=浏览文件和文件夹
 Exec=explorer %U
 Icon=system-file-manager
 Terminal=false
@@ -10,6 +13,7 @@ Type=Application
 MimeType=inode/directory;x-directory/normal;inode/mount-point;application/x-gnome-saved-search;
 Categories=Qt;KDE;System;FileTools;FileManager;
 Keywords=explorer;files;folders;browse;file manager;
+Keywords[zh_CN]=资源管理器;文件;文件夹;浏览;文件管理器;
 # Without this the pointer keeps its ordinary shape through the whole launch
 # and the taskbar shows nothing, so a slow cold start looks like a click that
 # did not register.
@@ -24,10 +28,12 @@ Actions=NewWindow;OpenHome;
 # the launcher entry offers these.
 [Desktop Action NewWindow]
 Name=Open New Window
+Name[zh_CN]=打开新窗口
 Exec=explorer
 Icon=window-new
 
 [Desktop Action OpenHome]
 Name=Open Home Folder
+Name[zh_CN]=打开主文件夹
 Exec=explorer ~
 Icon=user-home

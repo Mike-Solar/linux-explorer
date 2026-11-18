@@ -147,3 +147,4 @@ set_target_properties(explorer PROPERTIES
 install(TARGETS explorer RUNTIME DESTINATION bin)
 install(FILES linux-explorer.desktop DESTINATION share/applications)
 install(FILES linux-controlpanel.desktop DESTINATION share/applications)
+install(FILES translations/linux-explorer_zh_CN.qm DESTINATION share/linux-explorer/translations)

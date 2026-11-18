@@ -1,4 +1,8 @@
 #include <QApplication>
+#include <QFont>
+#include <QFontInfo>
+#include <QLocale>
+#include <QTranslator>
 #include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QDir>
@@ -145,6 +149,37 @@ int main(int argc, char *argv[]) {
     // No display name is set, Qt appending one to every title where Explorer's
     // is just the folder name
     app.setWindowIcon(Aero::themeIcon({"system-file-manager", "folder"}));
+
+    // Simplified Chinese UI, installed next to the binary for local builds and
+    // under the data directory when packaged.
+    QTranslator translator;
+    for (const QString &dir : {QCoreApplication::applicationDirPath() + QStringLiteral("/translations"),
+                               QStringLiteral("/usr/share/linux-explorer/translations")}) {
+        if (translator.load(QLocale::system(), QStringLiteral("linux-explorer"), QStringLiteral("_"), dir)) {
+            app.installTranslator(&translator);
+            break;
+        }
+    }
+
+    // A session can end up handing the application a serif fallback (SimSun)
+    // although the Plasma font is Microsoft YaHei; keep the Windows 7 chrome
+    // sans-serif in that case.
+    const QString resolvedFamily = QFontInfo(QApplication::font()).family();
+    if (resolvedFamily.contains(QStringLiteral("SimSun"), Qt::CaseInsensitive)
+        || resolvedFamily.contains(QStringLiteral("宋体"))
+        || resolvedFamily == QStringLiteral("Serif")) {
+        const QStringList candidates{QStringLiteral("Microsoft YaHei UI"),
+                                     QStringLiteral("Microsoft YaHei"),
+                                     QStringLiteral("Noto Sans CJK SC")};
+        for (const QString &candidate : candidates) {
+            if (QFontInfo(QFont(candidate)).family() == candidate) {
+                QFont font(candidate);
+                font.setPointSize(9);
+                app.setFont(font);
+                break;
+            }
+        }
+    }
 
     QCommandLineParser parser;
     parser.setApplicationDescription(
