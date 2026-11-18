@@ -3,6 +3,9 @@
 #include <QFontInfo>
 #include <QLocale>
 #include <QTranslator>
+
+#include <KConfigGroup>
+#include <KSharedConfig>
 #include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QDir>
@@ -159,6 +162,17 @@ int main(int argc, char *argv[]) {
             app.installTranslator(&translator);
             break;
         }
+    }
+
+    // Follow the desktop-wide font even when the platform theme did not hand
+    // it to us (portal/DBus activated launches end up with a bare environment
+    // and otherwise render the UI with a serif fallback).
+    const KConfigGroup general(KSharedConfig::openConfig(), QStringLiteral("General"));
+    const QString fontEntry = general.readEntry(QStringLiteral("font"));
+    if (!fontEntry.isEmpty()) {
+        QFont configuredFont;
+        if (configuredFont.fromString(fontEntry))
+            app.setFont(configuredFont);
     }
 
     // A session can end up handing the application a serif fallback (SimSun)
