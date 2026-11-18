@@ -580,7 +580,7 @@ QScrollArea *View::buildNavSidebar(const QString &currentCategory)
             row->addWidget(label, 1);
             bar.navV->addLayout(row);
         } else {
-            auto *link = new QLabel(cat);
+            auto *link = new QLabel(Branding::brand(cat));
             Aero::setPointSize(link, 9);
             link->setWordWrap(true);
             link->setCursor(Qt::PointingHandCursor);

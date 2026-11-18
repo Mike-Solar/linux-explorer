@@ -656,7 +656,7 @@ QWidget *LinuxUpdatePage::buildSelectView()
                          Aero::Palette::Surface));
     auto *hh = new QHBoxLayout(headerBar);
     hh->setContentsMargins(28, 18, 28, 12);
-    auto *hdr = new QLabel("Select the updates you want to install");
+    auto *hdr = new QLabel(Branding::brand("Select the updates you want to install"));
     Aero::setPointSize(hdr, 12);
     hdr->setStyleSheet(QStringLiteral("color: %1;")
         .arg(QLatin1String(Aero::Palette::CrumbHover)));
@@ -794,7 +794,7 @@ QWidget *LinuxUpdatePage::buildSelectView()
         .arg(QLatin1String(Aero::Palette::Text)));
     detV->addWidget(m_selDetailTitle);
 
-    m_selDetailBody = new QLabel("Select a package from the list to see details.");
+    m_selDetailBody = new QLabel(Branding::brand("Select a package from the list to see details."));
     Aero::setPointSize(m_selDetailBody, 9);
     m_selDetailBody->setWordWrap(true);
     m_selDetailBody->setAlignment(Qt::AlignTop | Qt::AlignLeft);

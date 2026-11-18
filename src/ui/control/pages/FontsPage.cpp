@@ -1,4 +1,5 @@
 #include "ui/control/pages/FontsPage.h"
+#include "data/control/Branding.h"
 #include "DetailsPane.h"
 #include "ui/control/Commands.h"
 #include "ui/control/Commands.h"
@@ -276,7 +277,7 @@ FontsPage::FontsPage(QScrollArea *sidebar, QWidget *parent)
     grid->setRowStretch(m_families.size() / kColumns + 1, 1);
 
     if (m_families.isEmpty()) {
-        auto *empty = new QLabel("No fonts were found.");
+        auto *empty = new QLabel(Branding::brand("No fonts were found."));
         Aero::setPointSize(empty, 9);
         empty->setStyleSheet("color: #555555; background: transparent; padding: 14px;");
         grid->addWidget(empty, 0, 0);

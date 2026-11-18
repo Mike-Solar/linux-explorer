@@ -1,4 +1,5 @@
 #include "ui/control/dialogs/DevicePropertiesDialog.h"
+#include "data/control/Branding.h"
 #include "ui/control/IconHelper.h"
 
 #include <QTabWidget>
@@ -199,7 +200,7 @@ QWidget *DevicePropertiesDialog::buildHardwareTab() {
     header->addWidget(nameLabel, 1);
     column->addLayout(header);
 
-    column->addWidget(new QLabel("Device Functions:"));
+    column->addWidget(new QLabel(Branding::brand("Device Functions:")));
 
     auto *tree = new QTreeWidget;
     tree->setColumnCount(2);

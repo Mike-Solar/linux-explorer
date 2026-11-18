@@ -1,4 +1,5 @@
 #include "ui/control/pages/DevicesAndPrintersPage.h"
+#include "data/control/Branding.h"
 #include "DetailsPane.h"
 #include "ui/control/dialogs/DevicePropertiesDialog.h"
 #include "ui/control/IconHelper.h"
@@ -154,7 +155,7 @@ DevicesAndPrintersPage::DevicesAndPrintersPage(QWidget *parent)
     m_printersList->setFixedHeight(kTileSize.height() + 24);
     contentV->addWidget(m_printersList);
 
-    m_statusLabel = new QLabel("Scanning for devices…");
+    m_statusLabel = new QLabel(Branding::brand("Scanning for devices…"));
     m_statusLabel->setStyleSheet("color: #666666; background: transparent;");
     m_statusLabel->setAlignment(Qt::AlignCenter);
     contentV->insertWidget(1, m_statusLabel);

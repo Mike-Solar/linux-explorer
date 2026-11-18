@@ -158,7 +158,7 @@ PerformancePage::PerformancePage(QScrollArea *sidebar, QWidget *parent)
             .arg(QLatin1String(Aero::Palette::Text)));
         table->addWidget(rated, row, 1, Qt::AlignVCenter);
 
-        auto *sub = new QLabel("(unrated)");
+        auto *sub = new QLabel(Branding::brand("(unrated)"));
         Aero::setPointSize(sub, 9);
         sub->setStyleSheet("color: #555555; background: transparent;");
         sub->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -335,7 +335,7 @@ PerformancePage::PerformancePage(QScrollArea *sidebar, QWidget *parent)
                                    "system-run" }).pixmap(16, 16));
     rerunIc->setStyleSheet("background: transparent;");
     bottomRow->addWidget(rerunIc, 0, Qt::AlignVCenter);
-    m_rerunLink = new QLabel("Re-run the assessment");
+    m_rerunLink = new QLabel(Branding::brand("Re-run the assessment"));
     Aero::setPointSize(m_rerunLink, 9);
     m_rerunLink->setStyleSheet(linkStyle);
     m_rerunLink->setCursor(Qt::PointingHandCursor);
@@ -501,7 +501,7 @@ void PerformancePage::onRateClicked()
     auto *hl = new QVBoxLayout(header);
     hl->setContentsMargins(16, 11, 16, 11);
     hl->setSpacing(0);
-    m_dlgTitle = new QLabel("Assessing system performance");
+    m_dlgTitle = new QLabel(Branding::brand("Assessing system performance"));
     Aero::setPointSize(m_dlgTitle, 10);
     Win7::setBold(m_dlgTitle, true);
     m_dlgTitle->setStyleSheet("color: #1A1A1A; background: transparent;");

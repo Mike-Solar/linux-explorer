@@ -1,4 +1,5 @@
 #include "ui/control/pages/PowerOptionsPage.h"
+#include "data/control/Branding.h"
 #include "ui/control/Win7Ui.h"
 
 #include <QScrollArea>
@@ -377,7 +378,7 @@ QWidget *PowerOptionsPage::buildPlanRow(const Plan &plan)
     nameLine->addWidget(name, 0, Qt::AlignVCenter);
     nameLine->addStretch(1);
 
-    auto *change = new QLabel("Change plan settings");
+    auto *change = new QLabel(Branding::brand("Change plan settings"));
     Aero::setPointSize(change, 9);
     change->setCursor(Qt::PointingHandCursor);
     change->setStyleSheet(

@@ -7,6 +7,9 @@ const QHash<QString, QString> &translations()
 {
     static const QHash<QString, QString> map = {
         { QStringLiteral("OK"), QStringLiteral("确定") },
+        { QStringLiteral("Determined by\nlowest subscore"), QStringLiteral("由最低子分数决定") },
+        { QStringLiteral("Learn more about scores and software\nonline"), QStringLiteral("联机了解关于分数和软件的详细信息") },
+        { QStringLiteral("\xe2\x9a\xa0 You may need to restart your computer "), QStringLiteral("\xe2\x9a\xa0 你可能需要重新启动计算机 ") },
         { QStringLiteral("On"), QStringLiteral("开") },
         { QStringLiteral("Fax"), QStringLiteral("传真") },
         { QStringLiteral("Off"), QStringLiteral("关") },
