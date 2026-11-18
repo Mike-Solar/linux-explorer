@@ -423,14 +423,14 @@ QWidget *View::buildHomePage()
     auto *headRow = new QHBoxLayout;
     headRow->setContentsMargins(0, 0, 0, 22);
 
-    auto *settingsLabel = new QLabel("Adjust your computer's settings");
+    auto *settingsLabel = new QLabel(Branding::brand("Adjust your computer's settings"));
     Aero::setPointSize(settingsLabel, 12);
     settingsLabel->setStyleSheet(QStringLiteral("color: %1;")
         .arg(QLatin1String(Aero::Palette::CrumbHover)));
     headRow->addWidget(settingsLabel);
     headRow->addStretch();
 
-    auto *viewByLabel = new QLabel("View by:");
+    auto *viewByLabel = new QLabel(Branding::brand("View by:"));
     viewByLabel->setStyleSheet("color: #333333; font-size: 9pt;");
     headRow->addWidget(viewByLabel);
 
@@ -571,7 +571,7 @@ QScrollArea *View::buildNavSidebar(const QString &currentCategory)
                 QStringLiteral("color: %1; font-size: 9pt; background: transparent;")
                     .arg(QLatin1String(Aero::Palette::Text)));
             row->addWidget(bullet, 0, Qt::AlignTop);
-            auto *label = new QLabel(cat);
+            auto *label = new QLabel(Branding::brand(cat));
             Aero::setPointSize(label, 9);
             Win7::setBold(label, true);
             label->setWordWrap(true);
@@ -669,7 +669,7 @@ QScrollArea *View::buildSubpageSidebar(const QList<SidebarLink> &links,
         bar.navV->addWidget(sep);
         bar.navV->addSpacing(4);
 
-        auto *seeAlsoLabel = new QLabel("See also");
+        auto *seeAlsoLabel = new QLabel(Branding::brand("See also"));
         Aero::setPointSize(seeAlsoLabel, 8);
         seeAlsoLabel->setContentsMargins(12, 0, 0, 0);
         seeAlsoLabel->setStyleSheet("color: #666666; background: transparent;");

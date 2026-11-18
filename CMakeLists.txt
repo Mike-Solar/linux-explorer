@@ -51,6 +51,7 @@ add_executable(explorer
     src/data/FileManagerService.cpp
     src/data/MenuEntries.cpp
     src/data/Settings.cpp
+    src/data/UiText.cpp
     src/model/Archives.cpp
     src/model/ComputerModel.cpp
     src/model/DirectoryModel.cpp
